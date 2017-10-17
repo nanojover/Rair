@@ -1,4 +1,4 @@
-package com.example.Steps;
+package com.ryanair.Steps;
 
 import Pages.CheckOutPage;
 import Pages.PaymentPage;
