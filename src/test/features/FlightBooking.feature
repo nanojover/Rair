@@ -1,4 +1,4 @@
-Feature: Book a Flight
+Feature: Booka a Flight from the Ryanair web page
 
   Scenario: Book a flight with a non valid creadit card
     Given flights from 'MAD' on 13/11/2017 to 'STN' on 12/12/2017
