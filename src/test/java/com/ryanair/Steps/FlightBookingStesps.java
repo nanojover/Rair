@@ -77,7 +77,7 @@ public class FlightBookingStesps {
 
     @Then("^a declined message is displayed$")
     public void a_declined_message_is_displayed() throws Throwable {
-
+        paymentPage.declinedMessageAssertion();
     }
 
 

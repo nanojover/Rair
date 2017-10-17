@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+
 public class PaymentPage {
     WebDriver driver;
     List<String> credentials = Arrays.asList("nanojover@hotmail.com", "Ma123456");
@@ -35,6 +37,15 @@ public class PaymentPage {
     By securityCode = By.name("securityCode");
     By cardHolderName = By.name("cardHolderName");
 
+    By billingAddress = By.name("billingAddressAddressLine1");
+    By billingAddressCity = By.name("billingAddressCity");
+    By billingAddressPostcode = By.name("billingAddressPostcode");
+    By billingAddressCountry = By.name("billingAddressCountry");
+
+    By declinedMessage = By.cssSelector("text=\"common.components.payment_forms.error_explain_declined\"");
+
+    By processPayment = By.cssSelector("ng-click=\"$ctrl.processPayment()\"");
+
     public PaymentPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -52,7 +63,6 @@ public class PaymentPage {
 
         CommonUtil.waitForElement(driver, loginButton);
         driver.findElement(loginButton).click();
-
     }
 
     public void fillPassengerDetails() {
@@ -93,23 +103,21 @@ public class PaymentPage {
         driver.findElement(cardHolderName).clear();
         driver.findElement(cardHolderName).sendKeys(cardDetails.get(1));
 
-        name="billingAddressAddressLine1"
-        driver.findElement(address).clear();
-        driver.findElement(address).sendKeys(cardDetails.get(2));
+        driver.findElement(billingAddress).clear();
+        driver.findElement(billingAddress).sendKeys(cardDetails.get(2));
 
-        name="billingAddressCity"
-        driver.findElement(city).clear();
-        driver.findElement(city).sendKeys(cardDetails.get(3));
+        driver.findElement(billingAddressCity).clear();
+        driver.findElement(billingAddressCity).sendKeys(cardDetails.get(3));
 
-        name="billingAddressPostcode"
-        driver.findElement(postalCode).clear();
-        driver.findElement(postalCode).sendKeys(cardDetails.get(4));
+        driver.findElement(billingAddressPostcode).clear();
+        driver.findElement(billingAddressPostcode).sendKeys(cardDetails.get(4));
 
-        name="billingAddressCountry"
-        driver.findElement(country).clear();
-        driver.findElement(country).sendKeys(cardDetails.get(5));
+        driver.findElement(billingAddressCountry).clear();
+        driver.findElement(billingAddressCountry).sendKeys(cardDetails.get(5));
 
-        /html/body/div[2]/main/div[1]/payment/div[2]/div/form/div[1]/div[2]/div[2]/div[6]/div/label/span/core-icon/div/svg
-                click
-        By clicking Pay Now, I confirm I have read and accept Ryanair's General Terms and Conditions of carriage, Website Terms and Privacy statement    }
+    }
+
+    public void declinedMessageAssertion() {
+        assertTrue("Declined message is not displayed", driver.findElement(declinedMessage).isDisplayed());
+    }
 }
